@@ -51,11 +51,11 @@ public class CSVReader implements Reader {
 
         for(Person p:people){
             if(p.equals(newperson)) {
-                System.out.println("added a same person: " + name);
+           //     System.out.println("added a same person: " + name);
                 return p;
             }
         }
-        System.out.println("added a new person: " + name);
+      //  System.out.println("added a new person: " + name);
         people.add(newperson);
 
         return  newperson;

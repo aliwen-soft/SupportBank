@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String args[]) {
         //Initialise Bank object
+        Bank bank = new Bank();
+        bank.updateTransactionFromFile("Transactions2014.csv");
         //Read input files and generate transaction list & person list
         //Feed transaction lists to bank
         //bank will have listAll and list(personAccount)
-        UserInput.run();
+        UserInput.run(bank);
 
 
     }
