@@ -1,6 +1,12 @@
 package training.supportbank;
 
+import jdk.jfr.internal.LogLevel;
+import jdk.jfr.internal.LogTag;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Money {
+    private static final Logger LOGGER = LogManager.getLogger();
     int amount;
 
     public Money(int amount){
@@ -9,9 +15,11 @@ public class Money {
     public Money(double amount){
         this.amount= (int) Math.round(amount*100);
     }
-    public Money(String samount){
-        double amount = Double.parseDouble(samount);
-        this.amount= (int) Math.round(amount*100);
+    public Money(String samount) throws NumberFormatException{
+                double amount = Double.parseDouble(samount);
+                this.amount = (int) Math.round(amount * 100);
+
+
     }
 
     public String printMoney(){

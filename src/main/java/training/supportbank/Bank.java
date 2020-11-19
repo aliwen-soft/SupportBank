@@ -43,7 +43,7 @@ public class Bank {
         });
     }
 
-    public synchronized void updateTransactionFromFile(String file)  {
+    public synchronized void updateTransactionFromFile(String file) throws NumberFormatException{
         //checkending for correct reader TODO
         Reader reader = new CSVReader(people);
 
