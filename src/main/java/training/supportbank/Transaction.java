@@ -39,4 +39,12 @@ public class Transaction {
     public String getTransactionNarrative() {
         return transactionNarrative;
     }
+
+    //checks if the transaction involves the given person
+    public boolean InvolvesPeron(Person person){
+        boolean output = false;
+        if (transactionFrom.equals(person)) output = true;
+        if (transactionTo.equals(person)) output = true;
+        return output;
+    }
 }
