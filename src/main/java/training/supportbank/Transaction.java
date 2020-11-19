@@ -10,7 +10,7 @@ public class Transaction {
     private Person transactionTo;
     private String transactionNarrative;
 
-    public Transaction(Date date, Money amount, String from, String to, String narrative){
+    public Transaction(Date date, Money amount, Person from, Person to, String narrative){
 
 
         transactionDate = date;
