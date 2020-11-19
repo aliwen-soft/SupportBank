@@ -6,11 +6,15 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Date.*;
 import java.util.List;
 import java.lang.Object;
+
 
 public abstract class Reader {
 
@@ -60,24 +64,10 @@ public abstract class Reader {
     }
 
     public Date convertExcelTime(String excelDate) throws NumberFormatException  {
-
         double time = Double.parseDouble(excelDate);
+        LocalDate localdate =LocalDate.of( 1899 , Month.DECEMBER , 30 ).plusDays((long)time);
+        Date date = Date.from(localdate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        Date javaDate= DateUtils.getJavaDate((double) time);
-
-      //  int days = (int) time;  //number of days
-       // int seconds = (int) ((time - days) * 86400);  //number of seconds in .6 days
-
-        //create calendar set to 01-Jan-1900
-        //Calendar cal = Calendar.getInstance();
-        //cal.set(Calendar.YEAR, 1900);
-        //cal.set(Calendar.MONTH, 0);
-        //cal.set(Calendar.DAY_OF_MONTH, 1);
-
-        //Add days and seconds to get required date/time
-        //cal.add(Calendar.DATE, days - 1);
-        //cal.add(Calendar.SECOND, seconds);
-
-        return javaDate;
+        return date;
     }
 }
