@@ -1,2 +1,1 @@
-# SupportBank
-Tom's Test Branch
+Template Maven command-line app for the SupportBank exercise
