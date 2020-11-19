@@ -1,5 +1,8 @@
 package training.supportbank;
+import com.sun.media.sound.InvalidFormatException;
+
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,8 +47,18 @@ public class Bank {
     }
 
     public synchronized void updateTransactionFromFile(String file) throws NumberFormatException{
-        //checkending for correct reader TODO
-        Reader reader = new CSVReader(people);
+
+        Reader reader;
+        String[] fileData = file.split("\\.");
+
+        if (fileData[1].equals("csv")) reader = new CSVReader(people);
+        else if (fileData[1].equals("xml"))
+            //TODO Change to XML reader
+            reader = new CSVReader(people);
+        else if (fileData[1].equals("json"))
+            //TODO Change to Json reader
+            reader = new CSVReader(people);
+        else throw new InvalidParameterException("File type must be .XML, .CSV or .JSON");
 
         try {
             List<Transaction> transactions = reader.readFile(file);
