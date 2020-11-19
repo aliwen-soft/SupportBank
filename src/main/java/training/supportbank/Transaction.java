@@ -17,4 +17,23 @@ public class Transaction {
         transactionNarrative =narrative;
     }
 
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public int getTransactionAmount() {
+        return transactionAmount;
+    }
+
+    public String getTransactionFrom() {
+        return transactionFrom;
+    }
+
+    public String getTransactionTo() {
+        return transactionTo;
+    }
+
+    public String getTransactionNarrative() {
+        return transactionNarrative;
+    }
 }
