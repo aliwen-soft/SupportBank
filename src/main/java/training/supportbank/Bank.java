@@ -5,7 +5,6 @@ public class Bank {
 
     private ArrayList<Person> people = new ArrayList<Person>();
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-    private ArrayList<Transaction> completedTransactions = new ArrayList<Transaction>();
 
     //edits the balance of the sender and receiver of a given transaction
     private void PerformTransaction(Transaction trans){
@@ -25,11 +24,7 @@ public class Bank {
 
     //performs all transactions in the list, then adds them to the completedTransactions list
     public void PerformAllTransactions(){
-        while(transactions.size() > 0){
-            PerformTransaction(transactions.get(0));
-            completedTransactions.add(transactions.get(0));
-            transactions.remove(0);
-        }
+        transactions.forEach(trans -> PerformTransaction(trans));
     }
 
     //lists each person, and their current balance
@@ -43,24 +38,16 @@ public class Bank {
     //lists each transaction involving a given person
     public void ListAccount(Person person){
         transactions.forEach(transaction -> {
-            if(QueryTransaction(transaction, person)) ListTransaction(transaction);
-        });
-
-        completedTransactions.forEach(transaction -> {
-            if(QueryTransaction(transaction, person)) ListTransaction(transaction);
+            if(transaction.InvolvesPeron(person)) ListTransaction(transaction);
         });
     }
 
-    //returns true if the person is part of the transaction supplied
-    private boolean QueryTransaction(Transaction transaction, Person person){
-        return false;
-    }
-
-    private void ListTransaction(Transaction transaction){
-        System.out.println("Date: " + transaction.getTransactionDate() +
-                            ", From: " + transaction.getTransactionFrom().getName() +
-                            ", To: " + transaction.getTransactionTo().getName() +
-                            ", Narrative: " + transaction.getTransactionNarrative() +
-                            ", Amount: " + transaction.getTransactionAmount());
+    //lists details of the current transaction
+    private void ListTransaction(Transaction trans){
+        System.out.println("Date: " + trans.getTransactionDate() +
+                            ", From: " + trans.getTransactionFrom().getName() +
+                            ", To: " + trans.getTransactionTo().getName() +
+                            ", Narrative: " + trans.getTransactionNarrative() +
+                            ", Amount: " + trans.getTransactionAmount());
     }
 }
