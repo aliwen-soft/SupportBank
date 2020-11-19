@@ -14,6 +14,12 @@ public class Money {
         this.amount= (int) Math.round(amount*100);
     }
 
+    public String printMoney(){
+        double dbl = amount/100;
+        String printamount= Double.toString(dbl);
+        return  "£ "+printamount;
+    }
+
     public int getAmount(){
         return amount;
     }

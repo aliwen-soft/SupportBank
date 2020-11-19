@@ -1,5 +1,7 @@
 package training.supportbank;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
@@ -11,8 +13,6 @@ public class Transaction {
     private String transactionNarrative;
 
     public Transaction(Date date, Money amount, Person from, Person to, String narrative){
-
-
         transactionDate = date;
         transactionAmount = amount;
         transactionFrom = from;

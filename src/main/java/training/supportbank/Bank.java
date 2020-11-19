@@ -1,7 +1,15 @@
 package training.supportbank;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Bank {
+
+    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     private ArrayList<Person> people = new ArrayList<Person>();
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
@@ -18,12 +26,12 @@ public class Bank {
     }
 
     //adds a new transaction to the list
-    public void AddTransaction(Transaction newTransaction){
+    private void AddTransaction(Transaction newTransaction){
         transactions.add(newTransaction);
     }
 
     //performs all transactions in the list, then adds them to the completedTransactions list
-    public void PerformAllTransactions(){
+    private void PerformAllTransactions(){
         transactions.forEach(trans -> PerformTransaction(trans));
     }
 
@@ -31,23 +39,46 @@ public class Bank {
     public void ListAll(){
         people.forEach(person -> {
             System.out.println(person.getName());
-            System.out.println("Balance: " + person.getBalance());
+            System.out.println("Balance: " + person.getBalance().printMoney());
         });
+    }
+
+    public synchronized void updateTransactionFromFile(String file)  {
+        //checkending for correct reader TODO
+        Reader reader = new CSVReader(people);
+
+        try {
+            List<Transaction> transactions = reader.readFile(file);
+            for(Transaction t:transactions){
+                AddTransaction(t);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        PerformAllTransactions();
+
     }
 
     //lists each transaction involving a given person
-    public void ListAccount(Person person){
-        transactions.forEach(transaction -> {
-            if(transaction.InvolvesPeron(person)) ListTransaction(transaction);
-        });
-    }
+    public void ListAccount(String name){
 
+        List<Person> match = people.stream().filter(i->i.getName().equals(name)).collect(Collectors.toList());
+        if(match.size()==1) {
+            Person person = match.get(0);
+            transactions.forEach(transaction -> {
+                if (transaction.InvolvesPeron(person)) ListTransaction(transaction);
+            });
+        }else{
+            System.out.println("error");
+        }
+    }
     //lists details of the current transaction
     private void ListTransaction(Transaction trans){
-        System.out.println("Date: " + trans.getTransactionDate() +
+        System.out.println("Date: " + dateFormat.format(trans.getTransactionDate()) +
                             ", From: " + trans.getTransactionFrom().getName() +
                             ", To: " + trans.getTransactionTo().getName() +
                             ", Narrative: " + trans.getTransactionNarrative() +
-                            ", Amount: " + trans.getTransactionAmount());
+                            ", Amount: " + trans.getTransactionAmount().printMoney());
     }
 }

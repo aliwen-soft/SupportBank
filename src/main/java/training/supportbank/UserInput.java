@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class UserInput {
     public static String helpMessage = "help info";
-    public static void run() {
+    public static void run(Bank bank) {
         boolean keepRunning = true;
         while(keepRunning) {
             Scanner scanner = new Scanner(System.in);
@@ -19,9 +19,11 @@ public class UserInput {
                         commandModifier = scanner.nextLine().substring(1);
                         if (commandModifier.equals("all")) {
                             //Bank list all method
+                            bank.ListAll();
                             System.out.println("Will list all");
                         } else {
                             //Band list account transactions
+                            bank.ListAccount(commandModifier);
                             System.out.println("Will list transactions for " + commandModifier);
                         }
                     } catch (StringIndexOutOfBoundsException e) {
