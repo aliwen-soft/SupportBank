@@ -1,16 +1,19 @@
 package training.supportbank;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-public class CSVReader extends Reader {
+public class XMLReader implements Reader {
 
-    public CSVReader(List<Person> people){
+    public List<Person> people;
+
+    public XMLReader(List<Person> people){
         this.people=people;
     }
 
@@ -43,5 +46,19 @@ public class CSVReader extends Reader {
 
     }
 
+    private Person checkPerson(String name){
 
+        Person newperson = new Person(name);
+
+        for(Person p:people){
+            if(p.equals(newperson)) {
+           //     System.out.println("added a same person: " + name);
+                return p;
+            }
+        }
+      //  System.out.println("added a new person: " + name);
+        people.add(newperson);
+
+        return  newperson;
+    }
 }
