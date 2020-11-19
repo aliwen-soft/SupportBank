@@ -9,8 +9,8 @@ public class Bank {
 
     //edits the balance of the sender and receiver of a given transaction
     private void PerformTransaction(Transaction trans){
-        trans.getTransactionFrom().EditBalance(-trans.getTransactionAmount());
-        trans.getTransactionTo().EditBalance(trans.getTransactionAmount());
+        trans.getTransactionFrom().decreaseBalance(trans.getTransactionAmount());
+        trans.getTransactionTo().increaseBalance(trans.getTransactionAmount());
     }
 
     //adds a new person to the list

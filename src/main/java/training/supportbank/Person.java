@@ -17,13 +17,18 @@ public class Person {
     }
 
     //returns the current balance in the account
-    public float getBalance(){
-        return balance.getAmount();
+    public Money getBalance(){
+        return balance;
     }
 
     //edits balance by a given amount
-    public void EditBalance(int amount){
+    public void increaseBalance(Money amount){
         balance.add(amount);
+    }
+
+    //edits balance by a given amount
+    public void decreaseBalance(Money amount){
+        balance.sub(amount);
     }
 
     public boolean equals(Object o){
