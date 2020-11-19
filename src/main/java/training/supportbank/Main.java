@@ -12,7 +12,7 @@ public class Main {
 
         //Initialise Bank object
         Bank bank = new Bank();
-        bank.updateTransactionFromFile("DodgyTransactions2015.csv");
+        bank.updateTransactionFromFile("Transactions2012.xml");
         //Read input files and generate transaction list & person list
         //Feed transaction lists to bank
         //bank will have listAll and list(personAccount)

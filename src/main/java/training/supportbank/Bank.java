@@ -45,7 +45,8 @@ public class Bank {
 
     public synchronized void updateTransactionFromFile(String file) throws NumberFormatException{
         //checkending for correct reader TODO
-        Reader reader = new CSVReader(people);
+        //Reader reader = new CSVReader(people);
+        Reader reader = new XMLReader(people);
 
         try {
             List<Transaction> transactions = reader.readFile(file);
