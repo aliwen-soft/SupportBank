@@ -11,6 +11,11 @@ public class Person {
         balance = new Money(0);
     }
 
+    //returns the name of the person
+    public String getName(){
+        return name;
+    }
+
     //returns the current balance in the account
     public float getBalance(){
         return balance.getAmount();
