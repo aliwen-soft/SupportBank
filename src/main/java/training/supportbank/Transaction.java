@@ -5,11 +5,11 @@ import java.util.Date;
 public class Transaction {
     private Date transactionDate;
     private int transactionAmount;
-    private String transactionFrom;
-    private String transactionTo;
+    private Person transactionFrom;
+    private Person transactionTo;
     private String transactionNarrative;
 
-    public Transaction(Date date, int amount, String from, String to, String narrative){
+    public Transaction(Date date, int amount, Person from, Person to, String narrative){
         transactionDate = date;
         transactionAmount = amount;
         transactionFrom = from;
@@ -25,11 +25,11 @@ public class Transaction {
         return transactionAmount;
     }
 
-    public String getTransactionFrom() {
+    public Person getTransactionFrom() {
         return transactionFrom;
     }
 
-    public String getTransactionTo() {
+    public Person getTransactionTo() {
         return transactionTo;
     }
 
