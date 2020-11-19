@@ -6,10 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class CSVReader implements Reader {
 
@@ -19,8 +16,8 @@ public class CSVReader implements Reader {
         this.people=people;
     }
 
-    public static List<Transaction> readFile(String filename) throws IOException {
-        List<Transaction> transactions =Collections.emptyList();
+    public List<Transaction> readFile(String filename) throws IOException {
+        List<Transaction> transactions = new ArrayList<Transaction>();
 
         BufferedReader csvReader = new BufferedReader(new FileReader(filename));
         String row;
@@ -30,8 +27,8 @@ public class CSVReader implements Reader {
                 String[] data = row.split(",");
                 try {
                     Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data[0]);
-                    String to = data[1];
-                    String from = data[2];
+                    Person to = checkPerson(data[1]);
+                    Person from = checkPerson(data[2]);
                     String narrative = data[3];
                     Money amount = new Money(data[4]);
 
@@ -46,5 +43,21 @@ public class CSVReader implements Reader {
         csvReader.close();
         return transactions;
 
+    }
+
+    private Person checkPerson(String name){
+
+        Person newperson = new Person(name);
+
+        for(Person p:people){
+            if(p.equals(newperson)) {
+                System.out.println("added a same person: " + name);
+                return p;
+            }
+        }
+        System.out.println("added a new person: " + name);
+        people.add(newperson);
+
+        return  newperson;
     }
 }
