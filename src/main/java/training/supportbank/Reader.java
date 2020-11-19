@@ -6,11 +6,15 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Date.*;
 import java.util.List;
 import java.lang.Object;
+
 
 public abstract class Reader {
 
@@ -26,9 +30,8 @@ public abstract class Reader {
             if (sdate.contains("/")) {
                 date = new SimpleDateFormat("dd/MM/yyyy").parse(sdate);
             } else {
-                date = convertTime(sdate);
+                date = convertExcelTime(sdate);
             }
-
             Person to = checkPerson(sto);
             Person from = checkPerson(sfrom);
             String narrative = snarrative;
@@ -39,7 +42,7 @@ public abstract class Reader {
         } catch (ParseException e) {
             LOGGER.info("Invalid date: " + sdate);
         } catch (NumberFormatException e) {
-            LOGGER.info("Non-parsable string given for amount: '" + smoney + "'");
+            LOGGER.info("Non-parsable string given for amount: '" + smoney + "'" + "or Invlaid date" + sdate);
         }
 
     }
@@ -60,21 +63,11 @@ public abstract class Reader {
         return newperson;
     }
 
-    public Date convertTime(String excelDate) {
+    public Date convertExcelTime(String excelDate) throws NumberFormatException  {
         double time = Double.parseDouble(excelDate);
-        int days = (int) time;  //number of days
-        int seconds = (int) ((time - days) * 86400);  //number of seconds in .6 days
+        LocalDate localdate =LocalDate.of( 1899 , Month.DECEMBER , 30 ).plusDays((long)time);
+        Date date = Date.from(localdate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        //create calendar set to 01-Jan-1900
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 1900);
-        cal.set(Calendar.MONTH, 0);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-
-        //Add days and seconds to get required date/time
-        cal.add(Calendar.DATE, days - 1);
-        cal.add(Calendar.SECOND, seconds);
-
-        return cal.getTime();
+        return date;
     }
 }
