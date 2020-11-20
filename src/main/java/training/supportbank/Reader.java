@@ -29,13 +29,6 @@ public abstract class Reader {
     public void addTransaction(List<Transaction> transactions, String sdate, String sto, String sfrom, String snarrative, String smoney) {
         try {
             Date date = convertDate(sdate);
-            /**if (sdate.contains("/")) {
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(sdate);}
-            else if (sdate.contains("-")) {
-                    date = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
-            } else {
-                date = convertExcelTime(sdate);
-            }**/
             Person to = checkPerson(sto);
             Person from = checkPerson(sfrom);
             String narrative = snarrative;
