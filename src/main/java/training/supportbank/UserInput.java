@@ -36,7 +36,7 @@ public class UserInput {
                 }else if (command.equals("Export")){
                     System.out.println("export");
                     String[] filename = scanner.nextLine().split(" ");
-                    bank.WriteTransaction(filename[2],"csv");
+                    bank.WriteTransaction(filename[2]);
 
                 }else if(command.equals("help")){
                     System.out.println(helpMessage);

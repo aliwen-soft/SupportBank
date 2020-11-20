@@ -26,8 +26,9 @@ public class Bank {
         trans.getTransactionTo().increaseBalance(trans.getTransactionAmount());
     }
 
-    public void WriteTransaction(String filename, String type){
+    public void WriteTransaction(String filename){
         Writer writer=new CSVWriter();;
+        String type =filename.split("\\.")[1];
         if(type.equals("csv")){
             writer =new CSVWriter();
         }
@@ -112,4 +113,6 @@ public class Bank {
                             ", Narrative: " + trans.getTransactionNarrative() +
                             ", Amount: " + trans.getTransactionAmount().printMoney());
     }
+
+
 }
