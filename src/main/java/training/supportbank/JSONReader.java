@@ -14,9 +14,6 @@ public class JSONReader extends Reader {
     private static final Logger LOGGER = LogManager.getLogger();
 
 
-    public JSONReader(List<Person> people){
-        this.people=people;
-    }
     @Override
     public Date convertDate(String date) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(date);
