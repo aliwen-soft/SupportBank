@@ -19,21 +19,18 @@ public class JSONReader extends Reader {
         return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 
-
     public List<Transaction> readFile(Bank bank,String filename) throws IOException,NumberFormatException {
         List<Transaction> transactions = new ArrayList();
         Gson gson = new Gson();
         Map[] allTransactions = gson.fromJson(new FileReader(filename), Map[].class);
-        System.out.println(allTransactions[0].get("fromAccount"));
 
-        for (Map<String,String> transaction : allTransactions) {
-            String sdate = transaction.get("date");
-            String sfrom = transaction.get("fromAccount");
-            String sto = transaction.get("toAccount");
-            String snarrative = transaction.get("narrative");
-            String samount = transaction.get("narrative");
+        for (Map<String,Object> transaction : allTransactions) {
+            String sdate = (String) transaction.get("date");
+            String sfrom = (String) transaction.get("fromAccount");
+            String sto = (String)transaction.get("toAccount");
+            String snarrative = (String)transaction.get("narrative");
+            String samount =Double.toString((Double) transaction.get("amount"));
             addTransaction(bank,sdate,sto,sfrom,snarrative,samount);
-
         }
         return transactions;
     }
