@@ -2,6 +2,11 @@ package training.supportbank;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.processing.Filer;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.text.DateFormat;
@@ -72,9 +77,11 @@ public class Bank {
         });
     }
 
-    public void updateTransactionFromFile(String file) throws NumberFormatException{
+    public void updateTransactionFromFile(String fileName) throws NumberFormatException, FileNotFoundException {
         Reader reader;
-        String[] fileData = file.split("\\.");
+        String[] fileData = fileName.split("\\.");
+        File file = new File(fileName);
+        FileReader test = new FileReader(file);
 
         if (fileData[1].equalsIgnoreCase("csv")) reader = new CSVReader();
         else if (fileData[1].equalsIgnoreCase("xml"))

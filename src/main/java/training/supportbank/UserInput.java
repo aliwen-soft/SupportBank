@@ -1,5 +1,7 @@
 package training.supportbank;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class UserInput {
@@ -32,7 +34,7 @@ public class UserInput {
                         System.out.println("No transactions imported");
                     } else {
                         try {
-                            if (commands[1].equals("All")) {
+                            if (commands[1].equalsIgnoreCase("All")) {
                                 System.out.println("listing all");
                                 bank.listAll();
                             } else {
@@ -49,8 +51,12 @@ public class UserInput {
                         }
                     }
                 }else if (commands[0].equalsIgnoreCase("Import")){
-                    System.out.println("Importing file");
-                    bank.updateTransactionFromFile(commands[2]);
+                    try {
+                        bank.updateTransactionFromFile(commands[2]);
+                        System.out.println("Imported file successfully.");
+                    }catch(FileNotFoundException f){
+                        System.out.println("Named file not found");
+                    }
                 }else if (commands[0].equalsIgnoreCase("Export")){
                     System.out.println("Export file");
                     bank.writeTransaction(commands[2]);

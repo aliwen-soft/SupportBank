@@ -3,6 +3,7 @@ package training.supportbank;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -18,10 +19,10 @@ public class CSVReader extends Reader {
         return  dateOut;
     }
 
-    public List<Transaction> readFile(Bank bank,String filename) throws IOException,NumberFormatException {
+    public List<Transaction> readFile(Bank bank, File file) throws IOException,NumberFormatException {
         List<Transaction> transactions = new ArrayList<Transaction>();
 
-        BufferedReader csvReader = new BufferedReader(new FileReader(filename));
+        BufferedReader csvReader = new BufferedReader(new FileReader(file));
         String row;
         boolean first=true;
         int lineNumber = 0;

@@ -3,6 +3,8 @@ package training.supportbank;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
@@ -14,7 +16,7 @@ public abstract class Reader {
 
     public abstract Date convertDate(String date) throws ParseException;
 
-    public abstract List<Transaction> readFile(Bank bank, String filename) throws IOException;
+    public abstract List<Transaction> readFile(Bank bank, File file) throws IOException, FileNotFoundException;
 
     public void addTransaction(Bank bank, String dateString, String toString, String fromString, String narrative, String moneyString) {
         List<Transaction> transactions = bank.getTransactions();
