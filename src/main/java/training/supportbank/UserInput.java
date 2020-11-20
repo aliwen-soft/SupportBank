@@ -9,33 +9,33 @@ public class UserInput {
         while(keepRunning) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter command:");
-            String command = scanner.next();
+            String command = scanner.nextLine();
+            String[] commands = command.split(" ");
             String commandModifier;
 
-                if (command.equals("list")) {
+                if (commands[0].equals("List")) {
                     try {
-                        commandModifier = scanner.nextLine().substring(1);
-                        if (commandModifier.equals("all")) {
-                            //Bank list all method
-                            bank.ListAll();
+                        if (commands[1].equals("All")) {
                             System.out.println("listing all");
+                            bank.ListAll();
                         } else {
-                            //Band list account transactions
-                            bank.ListAccount(commandModifier);
-                            System.out.println("listing transactions for " + commandModifier);
+                            String name="";
+                            for(int i=1;i<commands.length;i++){
+                                name=name+" "+commands[i];
+                            }
+                            name = name.trim();
+                            bank.ListAccount(name);
+                            System.out.println("listing transactions for" + name);
                         }
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("Can call 'list all' or 'list [Person]'");
                     }
-                }else if (command.equals("Import")){
-                    System.out.println("import");
-                    String[] filename = scanner.nextLine().split(" ");
-                    bank.updateTransactionFromFile(filename[2]);
-                }else if (command.equals("Export")){
-                    System.out.println("export");
-                    String[] filename = scanner.nextLine().split(" ");
-                    bank.WriteTransaction(filename[2]);
-
+                }else if (commands[0].equals("Import")){
+                    System.out.println("Importing file");
+                    bank.updateTransactionFromFile(commands[2]);
+                }else if (commands[0].equals("Export")){
+                    System.out.println("Export file");
+                    bank.WriteTransaction(commands[2]);
                 }else if(command.equals("help")){
                     System.out.println(helpMessage);
                 } else if(command.equals("exit")){
