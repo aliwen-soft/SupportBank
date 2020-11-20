@@ -15,6 +15,7 @@ public class CSVWriter extends Writer {
            String line = dateFormat.format(t.getTransactionDate()) + "," + t.getTransactionFrom().getName() +"," + t.getTransactionTo().getName()+","+t.getTransactionNarrative()+","+t.getTransactionAmount().printMoney(false);
            writer.write(line);
            writer.write("\n");
+
        }
 
         writer.close();
