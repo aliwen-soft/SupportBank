@@ -20,15 +20,24 @@ public class UserInput {
                         if (commandModifier.equals("all")) {
                             //Bank list all method
                             bank.ListAll();
-                            System.out.println("Will list all");
+                            System.out.println("listing all");
                         } else {
                             //Band list account transactions
                             bank.ListAccount(commandModifier);
-                            System.out.println("Will list transactions for " + commandModifier);
+                            System.out.println("listing transactions for " + commandModifier);
                         }
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("Can call 'list all' or 'list [Person]'");
                     }
+                }else if (command.equals("Import")){
+                    System.out.println("import");
+                    String[] filename = scanner.nextLine().split(" ");
+                    bank.updateTransactionFromFile(filename[2]);
+                }else if (command.equals("Export")){
+                    System.out.println("export");
+                    String[] filename = scanner.nextLine().split(" ");
+                    bank.WriteTransaction(filename[2],"csv");
+
                 }else if(command.equals("help")){
                     System.out.println(helpMessage);
                 } else if(command.equals("exit")){

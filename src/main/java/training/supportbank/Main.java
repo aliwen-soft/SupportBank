@@ -16,8 +16,7 @@ public class Main {
         Bank bank = new Bank();
 
         try {
-            bank.updateTransactionFromFile("Transactions2013.json");
-            bank.WriteTransaction("written.csv","csv");
+            //bank.updateTransactionFromFile("Transactions2013.json");
             UserInput.run(bank);
         } catch (InvalidParameterException e){
             LOGGER.info("Invalid File Type: Must be .CSV, .XML or .JSON");
