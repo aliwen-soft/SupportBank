@@ -29,20 +29,13 @@ public class JSONReader extends Reader {
 
 
         Gson gson = new Gson();
-        ArrayList allData = gson.fromJson(new FileReader(filename), ArrayList.class);
-
-        // object = new Gson().fromJson(new Gson().toJson(((LinkedTreeMap<String, Object>) theLinkedTreeMapObject)), MyClass .class)
-
-        //System.out.println(allData);
+        ArrayList<ArrayList> allData = gson.fromJson(new FileReader(filename), ArrayList.class);
         for (Object item:allData
              ) {
             //System.out.println(item);
             String stringData = item.toString();
             String[] dataRaw = stringData.substring(1,stringData.length()-2).split(",");
-            Stream<Object> dataParsed = Arrays.stream(dataRaw).map(i -> {
-                String j = i.split("=")[1];
-                return j;
-            });
+            Stream<Object> dataParsed = Arrays.stream(dataRaw).map(i -> i.split("=")[1]);
             Object[] data = dataParsed.toArray();
             String sdate = data[0].toString();
             String sfrom = data[1].toString();
