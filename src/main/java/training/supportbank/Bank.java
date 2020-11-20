@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Bank {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static final DateFormat DATA_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     private ArrayList<Person> people = new ArrayList<Person>();
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
@@ -43,12 +43,12 @@ public class Bank {
     }
 
     //adds a new person to the list
-    public void AddPerson(Person newPerson){
+    public void addPerson(Person newPerson){
         people.add(newPerson);
     }
 
     //adds a new transaction to the list
-    private void AddTransaction(Transaction newTransaction){
+    private void addTransaction(Transaction newTransaction){
         transactions.add(newTransaction);
     }
 
@@ -82,7 +82,7 @@ public class Bank {
         try {
             List<Transaction> transactions = reader.readFile(file);
             for(Transaction t:transactions){
-                AddTransaction(t);
+                addTransaction(t);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class Bank {
     }
     //lists details of the current transaction
     private void ListTransaction(Transaction trans){
-        System.out.println("Date: " + dateFormat.format(trans.getTransactionDate()) +
+        System.out.println("Date: " + DATA_FORMAT.format(trans.getTransactionDate()) +
                             ", From: " + trans.getTransactionFrom().getName() +
                             ", To: " + trans.getTransactionTo().getName() +
                             ", Narrative: " + trans.getTransactionNarrative() +

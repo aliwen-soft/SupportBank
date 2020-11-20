@@ -12,8 +12,6 @@ public class UserInput {
             String command = scanner.next();
             String commandModifier;
 
-                //System.out.println(command);
-                //System.out.println(commandModifier);
                 if (command.equals("list")) {
                     try {
                         commandModifier = scanner.nextLine().substring(1);
