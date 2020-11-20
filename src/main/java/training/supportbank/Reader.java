@@ -22,18 +22,20 @@ public abstract class Reader {
 
     public List<Person> people;
 
+    public abstract Date convertDate(String date) throws ParseException;
+
     public abstract List<Transaction> readFile(String filename) throws IOException;
 
     public void addTransaction(List<Transaction> transactions, String sdate, String sto, String sfrom, String snarrative, String smoney) {
         try {
-            Date date;
-            if (sdate.contains("/")) {
+            Date date = convertDate(sdate);
+            /**if (sdate.contains("/")) {
                 date = new SimpleDateFormat("dd/MM/yyyy").parse(sdate);}
             else if (sdate.contains("-")) {
                     date = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
             } else {
                 date = convertExcelTime(sdate);
-            }
+            }**/
             Person to = checkPerson(sto);
             Person from = checkPerson(sfrom);
             String narrative = snarrative;
@@ -65,11 +67,5 @@ public abstract class Reader {
         return newperson;
     }
 
-    public Date convertExcelTime(String excelDate) throws NumberFormatException  {
-        double time = Double.parseDouble(excelDate);
-        LocalDate localdate =LocalDate.of( 1899 , Month.DECEMBER , 30 ).plusDays((long)time);
-        Date date = Date.from(localdate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        return date;
-    }
 }

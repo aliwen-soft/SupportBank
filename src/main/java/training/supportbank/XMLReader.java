@@ -17,6 +17,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +30,20 @@ public class XMLReader extends Reader {
 
     public XMLReader(List<Person> people) {
         this.people = people;
+    }
+
+    public Date convertExcelTime(String excelDate) throws NumberFormatException  {
+        double time = Double.parseDouble(excelDate);
+        LocalDate localdate =LocalDate.of( 1899 , Month.DECEMBER , 30 ).plusDays((long)time);
+        Date date = Date.from(localdate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        return date;
+    }
+
+    @Override
+    public Date convertDate(String date) throws ParseException {
+        Date dateOut = convertExcelTime(date);
+        return  dateOut;
     }
 
     public List<Transaction> readFile(String filename) throws IOException {
