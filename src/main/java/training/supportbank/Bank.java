@@ -48,6 +48,7 @@ public class Bank {
 
     public synchronized void updateTransactionFromFile(String file) throws NumberFormatException{
 
+
         Reader reader;
         String[] fileData = file.split("\\.");
 
@@ -59,6 +60,7 @@ public class Bank {
             //TODO Change to Json reader
             reader = new CSVReader(people);
         else throw new InvalidParameterException("File type must be .XML, .CSV or .JSON");
+
 
         try {
             List<Transaction> transactions = reader.readFile(file);

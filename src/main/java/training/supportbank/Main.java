@@ -21,6 +21,7 @@ public class Main {
         } catch (InvalidParameterException e){
             LOGGER.info("Invalid File Type: Must be .CSV, .XML or .JSON");
         }
+
         //Read input files and generate transaction list & person list
         //Feed transaction lists to bank
         //bank will have listAll and list(personAccount)

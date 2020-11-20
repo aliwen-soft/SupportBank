@@ -11,9 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class CSVReader implements Reader {
+public class CSVReader extends Reader {
     private static final Logger LOGGER = LogManager.getLogger();
-    public List<Person> people;
+   
 
     public CSVReader(List<Person> people){
         this.people=people;
@@ -52,19 +52,5 @@ public class CSVReader implements Reader {
 
     }
 
-    private Person checkPerson(String name){
 
-        Person newperson = new Person(name);
-
-        for(Person p:people){
-            if(p.equals(newperson)) {
-           //     System.out.println("added a same person: " + name);
-                return p;
-            }
-        }
-      //  System.out.println("added a new person: " + name);
-        people.add(newperson);
-
-        return  newperson;
-    }
 }
