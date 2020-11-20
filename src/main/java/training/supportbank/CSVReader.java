@@ -25,9 +25,11 @@ public class CSVReader extends Reader {
         BufferedReader csvReader = new BufferedReader(new FileReader(filename));
         String row;
         boolean first=true;
+        int lineNumber = 0;
         while ((row = csvReader.readLine()) != null) {
             if(!first) {
                 String[] data = row.split(",");
+                lineNumber++;
                 try {
                     Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data[0]);
                     Person to = checkPerson(data[1]);
@@ -38,9 +40,9 @@ public class CSVReader extends Reader {
                     Transaction transaction= new Transaction(date,amount,from,to,narrative);
                     transactions.add(transaction);
                 } catch (ParseException e) {
-                    LOGGER.info("Invalid date: " + data[0]);
+                    LOGGER.info("Invalid date at line " + lineNumber + ": " + data[0]);
                 } catch(NumberFormatException e){
-                LOGGER.info("Non-parsable string given for amount: '" + data[4] + "'");
+                LOGGER.info("Non-parsable string given for amount at line " + lineNumber + ": '" + data[4] + "'");
             }
             }
             first=false;
