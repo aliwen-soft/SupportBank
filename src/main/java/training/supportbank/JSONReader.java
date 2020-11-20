@@ -1,16 +1,10 @@
 package training.supportbank;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;

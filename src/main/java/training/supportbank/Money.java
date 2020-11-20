@@ -1,7 +1,5 @@
 package training.supportbank;
 
-import jdk.jfr.internal.LogLevel;
-import jdk.jfr.internal.LogTag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

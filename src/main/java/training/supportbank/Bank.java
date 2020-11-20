@@ -1,8 +1,7 @@
 package training.supportbank;
-import com.sun.media.sound.InvalidFormatException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.text.DateFormat;
@@ -10,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class Bank {
     private static final Logger LOGGER = LogManager.getLogger();
