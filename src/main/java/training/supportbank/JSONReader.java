@@ -32,7 +32,6 @@ public class JSONReader extends Reader {
         List<Transaction> transactions = new ArrayList();
         Gson gson = new Gson();
         Map[] allTransactions = gson.fromJson(new FileReader(filename), Map[].class);
-        //List allTrans = Arrays.asList(allData);
         System.out.println(allTransactions[0].get("fromAccount"));
 
         for (Map<String,String> transaction : allTransactions) {
