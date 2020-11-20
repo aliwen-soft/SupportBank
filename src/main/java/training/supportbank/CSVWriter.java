@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CSVWriter extends Writer {
     @Override
-    public void Write(List<Transaction> transactions, String file) throws IOException {
+    public void write(List<Transaction> transactions, String file) throws IOException {
         FileWriter writer = new FileWriter(file);
 
         writer.write("Date,From,To,Narrative,Amount\n");

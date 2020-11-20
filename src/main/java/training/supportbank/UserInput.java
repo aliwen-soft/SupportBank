@@ -17,14 +17,14 @@ public class UserInput {
                     try {
                         if (commands[1].equals("All")) {
                             System.out.println("listing all");
-                            bank.ListAll();
+                            bank.listAll();
                         } else {
                             String name="";
                             for(int i=1;i<commands.length;i++){
                                 name=name+" "+commands[i];
                             }
                             name = name.trim();
-                            bank.ListAccount(name);
+                            bank.listAccount(name);
                             System.out.println("listing transactions for" + name);
                         }
                     } catch (StringIndexOutOfBoundsException e) {
@@ -35,7 +35,7 @@ public class UserInput {
                     bank.updateTransactionFromFile(commands[2]);
                 }else if (commands[0].equals("Export")){
                     System.out.println("Export file");
-                    bank.WriteTransaction(commands[2]);
+                    bank.writeTransaction(commands[2]);
                 }else if(command.equals("help")){
                     System.out.println(helpMessage);
                 } else if(command.equals("exit")){

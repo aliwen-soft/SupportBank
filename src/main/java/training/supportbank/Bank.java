@@ -25,7 +25,7 @@ public class Bank {
         trans.getTransactionTo().increaseBalance(trans.getTransactionAmount());
     }
 
-    public void WriteTransaction(String filename){
+    public void writeTransaction(String filename){
         Writer writer=new CSVWriter();;
         String type =filename.split("\\.")[1];
         if(type.equals("csv")){
@@ -33,7 +33,7 @@ public class Bank {
         }
 
         try {
-            writer.Write(transactions,filename);
+            writer.write(transactions,filename);
         } catch (IOException e) {
             LOGGER.info("error writing to file");
             e.printStackTrace();
@@ -52,12 +52,12 @@ public class Bank {
     }
 
     //performs all transactions in the list, then adds them to the completedTransactions list
-    private void PerformAllTransactions(){
+    private void performAllTransactions(){
         transactions.forEach(trans -> PerformTransaction(trans));
     }
 
     //lists each person, and their current balance
-    public void ListAll(){
+    public void listAll(){
         people.forEach(person -> {
             System.out.println(person.getName());
             System.out.println("Balance: " + person.getBalance().printMoney());
@@ -87,25 +87,25 @@ public class Bank {
             e.printStackTrace();
         }
 
-        PerformAllTransactions();
+        performAllTransactions();
 
     }
 
     //lists each transaction involving a given person
-    public void ListAccount(String name){
+    public void listAccount(String name){
 
         List<Person> match = people.stream().filter(i->i.getName().equals(name)).collect(Collectors.toList());
         if(match.size()==1) {
             Person person = match.get(0);
             transactions.forEach(transaction -> {
-                if (transaction.InvolvesPeron(person)) ListTransaction(transaction);
+                if (transaction.involvesPeron(person)) listTransaction(transaction);
             });
         }else{
             System.out.println("error");
         }
     }
     //lists details of the current transaction
-    private void ListTransaction(Transaction trans){
+    private void listTransaction(Transaction trans){
         System.out.println("Date: " + DATA_FORMAT.format(trans.getTransactionDate()) +
                             ", From: " + trans.getTransactionFrom().getName() +
                             ", To: " + trans.getTransactionTo().getName() +
