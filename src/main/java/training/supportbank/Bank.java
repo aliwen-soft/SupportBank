@@ -68,7 +68,7 @@ public class Bank {
     public void listAll(){
         people.forEach(person -> {
             System.out.println(person.getName());
-            System.out.println("Balance: " + person.getBalance().printMoney());
+            System.out.println("Balance: " + person.getBalance().printMoney(true));
         });
     }
 
@@ -116,7 +116,7 @@ public class Bank {
                             ", From: " + trans.getTransactionFrom().getName() +
                             ", To: " + trans.getTransactionTo().getName() +
                             ", Narrative: " + trans.getTransactionNarrative() +
-                            ", Amount: " + trans.getTransactionAmount().printMoney());
+                            ", Amount: " + trans.getTransactionAmount().printMoney(true));
     }
 
 
