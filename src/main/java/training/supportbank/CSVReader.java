@@ -19,6 +19,12 @@ public class CSVReader extends Reader {
         this.people=people;
     }
 
+    @Override
+    public Date convertDate(String date) throws ParseException {
+        Date dateOut = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        return  dateOut;
+    }
+
     public List<Transaction> readFile(String filename) throws IOException,NumberFormatException {
         List<Transaction> transactions = new ArrayList<Transaction>();
 
