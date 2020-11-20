@@ -17,10 +17,13 @@ public class Main {
 
         try {
             bank.updateTransactionFromFile("Transactions2013.json");
+            bank.WriteTransaction("written.csv","csv");
             UserInput.run(bank);
         } catch (InvalidParameterException e){
             LOGGER.info("Invalid File Type: Must be .CSV, .XML or .JSON");
         }
+
+
 
         //Read input files and generate transaction list & person list
         //Feed transaction lists to bank

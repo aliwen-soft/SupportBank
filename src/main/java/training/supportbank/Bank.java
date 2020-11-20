@@ -1,5 +1,7 @@
 package training.supportbank;
 import com.sun.media.sound.InvalidFormatException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Bank {
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -21,6 +24,21 @@ public class Bank {
     private void PerformTransaction(Transaction trans){
         trans.getTransactionFrom().decreaseBalance(trans.getTransactionAmount());
         trans.getTransactionTo().increaseBalance(trans.getTransactionAmount());
+    }
+
+    public void WriteTransaction(String filename, String type){
+        Writer writer=new CSVWriter();;
+        if(type.equals("csv")){
+            writer =new CSVWriter();
+        }
+
+        try {
+            writer.Write(transactions,filename);
+        } catch (IOException e) {
+            LOGGER.info("error writing to file");
+            e.printStackTrace();
+        }
+
     }
 
     //adds a new person to the list
