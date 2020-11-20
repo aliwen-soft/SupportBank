@@ -9,12 +9,12 @@ public class CSVWriter extends Writer {
     public void Write(List<Transaction> transactions, String file) throws IOException {
         FileWriter writer = new FileWriter(file);
 
-        writer.write("Date,From,To,Narrative,Amount");
+        writer.write("Date,From,To,Narrative,Amount\n");
 
        for (Transaction t: transactions){
-           String line = dateFormat.format(t.getTransactionDate()) + "," + t.getTransactionFrom() +"," + t.getTransactionTo()+","+t.getTransactionNarrative()+","+t.getTransactionAmount().printMoney();
+           String line = dateFormat.format(t.getTransactionDate()) + "," + t.getTransactionFrom().getName() +"," + t.getTransactionTo().getName()+","+t.getTransactionNarrative()+","+t.getTransactionAmount().printMoney(false);
            writer.write(line);
-           System.out.println(line);
+           writer.write("\n");
        }
 
         writer.close();

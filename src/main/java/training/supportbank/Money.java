@@ -27,6 +27,15 @@ public class Money {
         String printamount= Double.toString(dbl);
         return  "£ "+printamount;
     }
+    public String printMoney(boolean sign){
+        double dbl = amount/100;
+        String printamount= Double.toString(dbl);
+        if (sign) {
+            return "£ " + printamount;
+        }else{
+            return printamount;
+        }
+    }
 
     public int getAmount(){
         return amount;
