@@ -3,6 +3,8 @@ package training.supportbank;
 import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -17,10 +19,10 @@ public class JSONReader extends Reader {
         return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 
-    public List<Transaction> readFile(Bank bank,String filename) throws IOException,NumberFormatException {
+    public List<Transaction> readFile(Bank bank, File file) throws IOException,NumberFormatException {
         List<Transaction> transactions = new ArrayList();
         Gson gson = new Gson();
-        Map[] allTransactions = gson.fromJson(new FileReader(filename), Map[].class);
+        Map[] allTransactions = gson.fromJson(new FileReader(file), Map[].class);
 
         for (Map<String,Object> transaction : allTransactions) {
             String date = (String) transaction.get("date");

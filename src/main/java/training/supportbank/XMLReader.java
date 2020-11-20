@@ -35,10 +35,10 @@ public class XMLReader extends Reader {
         return  dateOut;
     }
 
-    public List<Transaction> readFile(Bank bank,String filename) throws IOException {
+    public List<Transaction> readFile(Bank bank, File file) throws IOException {
         List<Transaction> transactions = new ArrayList<Transaction>();
         try {
-            File xmlFile = new File(filename);
+            File xmlFile = file;
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(xmlFile);
@@ -64,7 +64,7 @@ public class XMLReader extends Reader {
             }
 
         } catch (ParserConfigurationException | SAXException e) {
-            LOGGER.info("failed to parse file: " + filename);
+            LOGGER.info("failed to parse file: " + file);
             e.printStackTrace();
         }
 
