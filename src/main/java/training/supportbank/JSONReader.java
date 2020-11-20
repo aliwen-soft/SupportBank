@@ -19,37 +19,29 @@ import java.util.stream.Stream;
 public class JSONReader extends Reader {
     private static final Logger LOGGER = LogManager.getLogger();
 
-
     public JSONReader(List<Person> people){
         this.people=people;
     }
 
     @Override
     public Date convertDate(String date) throws ParseException {
-        Date dateOut = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        return  dateOut;
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 
     public List<Transaction> readFile(String filename) throws IOException,NumberFormatException {
-        List<Transaction> transactions = new ArrayList<Transaction>();
-
-
+        List<Transaction> transactions = new ArrayList();
         Gson gson = new Gson();
-        ArrayList<ArrayList> allData = gson.fromJson(new FileReader(filename), ArrayList.class);
-        for (Object item:allData
-             ) {
-            //System.out.println(item);
-            String stringData = item.toString();
-            String[] dataRaw = stringData.substring(1,stringData.length()-2).split(",");
-            Stream<Object> dataParsed = Arrays.stream(dataRaw).map(i -> i.split("=")[1]);
-            Object[] data = dataParsed.toArray();
-            String sdate = data[0].toString();
-            String sfrom = data[1].toString();
-            String sto = data[2].toString();
-            String snarrative = data[3].toString();
-            String samount = data[4].toString();
+        Map[] allTransactions = gson.fromJson(new FileReader(filename), Map[].class);
+        //List allTrans = Arrays.asList(allData);
+        System.out.println(allTransactions[0].get("fromAccount"));
+
+        for (Map<String,String> transaction : allTransactions) {
+            String sdate = transaction.get("date");
+            String sfrom = transaction.get("fromAccount");
+            String sto = transaction.get("toAccount");
+            String snarrative = transaction.get("narrative");
+            String samount = transaction.get("narrative");
             addTransaction(transactions,sdate,sto,sfrom,snarrative,samount);
-            //System.out.println(snarrative);
         }
         return transactions;
     }
