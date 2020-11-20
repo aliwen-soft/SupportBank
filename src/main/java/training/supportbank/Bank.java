@@ -16,8 +16,16 @@ public class Bank {
 
     private static final DateFormat DATA_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
-    private ArrayList<Person> people = new ArrayList<Person>();
-    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private List<Person> people = new ArrayList<Person>();
+    private List<Transaction> transactions = new ArrayList<Transaction>();
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
 
     //edits the balance of the sender and receiver of a given transaction
     private void PerformTransaction(Transaction trans){
@@ -33,7 +41,7 @@ public class Bank {
         }
 
         try {
-            writer.write(transactions,filename);
+            writer.Write(transactions,filename);
         } catch (IOException e) {
             LOGGER.info("error writing to file");
             e.printStackTrace();
@@ -64,22 +72,20 @@ public class Bank {
         });
     }
 
-    public synchronized void updateTransactionFromFile(String file) throws NumberFormatException{
-
-
+    public void updateTransactionFromFile(String file) throws NumberFormatException{
         Reader reader;
         String[] fileData = file.split("\\.");
 
-        if (fileData[1].equals("csv")) reader = new CSVReader(people);
+        if (fileData[1].equals("csv")) reader = new CSVReader();
         else if (fileData[1].equals("xml"))
-            reader = new XMLReader(people);
+            reader = new XMLReader();
         else if (fileData[1].equals("json"))
-            reader = new JSONReader(people);
+            reader = new JSONReader();
         else throw new InvalidParameterException("File type must be .XML, .CSV or .JSON");
 
 
         try {
-            List<Transaction> transactions = reader.readFile(file);
+            List<Transaction> transactions = reader.readFile(this,file);
             for(Transaction t:transactions){
                 addTransaction(t);
             }
@@ -98,7 +104,7 @@ public class Bank {
         if(match.size()==1) {
             Person person = match.get(0);
             transactions.forEach(transaction -> {
-                if (transaction.involvesPeron(person)) listTransaction(transaction);
+                if (transaction.InvolvesPeron(person)) listTransaction(transaction);
             });
         }else{
             System.out.println("error");

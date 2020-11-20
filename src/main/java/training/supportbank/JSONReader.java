@@ -13,16 +13,17 @@ import java.util.stream.Stream;
 public class JSONReader extends Reader {
     private static final Logger LOGGER = LogManager.getLogger();
 
+
     public JSONReader(List<Person> people){
         this.people=people;
     }
-
     @Override
     public Date convertDate(String date) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 
-    public List<Transaction> readFile(String filename) throws IOException,NumberFormatException {
+
+    public List<Transaction> readFile(Bank bank,String filename) throws IOException,NumberFormatException {
         List<Transaction> transactions = new ArrayList();
         Gson gson = new Gson();
         Map[] allTransactions = gson.fromJson(new FileReader(filename), Map[].class);
@@ -34,7 +35,8 @@ public class JSONReader extends Reader {
             String sto = transaction.get("toAccount");
             String snarrative = transaction.get("narrative");
             String samount = transaction.get("narrative");
-            addTransaction(transactions,sdate,sto,sfrom,snarrative,samount);
+            addTransaction(bank,sdate,sto,sfrom,snarrative,samount);
+
         }
         return transactions;
     }
