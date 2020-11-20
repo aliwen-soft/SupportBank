@@ -62,7 +62,7 @@ public class XMLReader extends Reader {
             e.printStackTrace();
         }
         for(Transaction t:transactions){
-            System.out.println(t.getTransactionNarrative());
+          //  System.out.println(t.getTransactionNarrative());
         }
         return transactions;
     }

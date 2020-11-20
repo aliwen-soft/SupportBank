@@ -28,7 +28,9 @@ public abstract class Reader {
         try {
             Date date;
             if (sdate.contains("/")) {
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(sdate);
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(sdate);}
+            else if (sdate.contains("-")) {
+                    date = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
             } else {
                 date = convertExcelTime(sdate);
             }

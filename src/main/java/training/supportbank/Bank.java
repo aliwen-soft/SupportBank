@@ -54,11 +54,9 @@ public class Bank {
 
         if (fileData[1].equals("csv")) reader = new CSVReader(people);
         else if (fileData[1].equals("xml"))
-            //TODO Change to XML reader
-            reader = new CSVReader(people);
+            reader = new XMLReader(people);
         else if (fileData[1].equals("json"))
-            //TODO Change to Json reader
-            reader = new CSVReader(people);
+            reader = new JSONReader(people);
         else throw new InvalidParameterException("File type must be .XML, .CSV or .JSON");
 
 

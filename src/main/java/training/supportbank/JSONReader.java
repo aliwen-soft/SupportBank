@@ -42,8 +42,8 @@ public class JSONReader extends Reader {
             String sto = data[2].toString();
             String snarrative = data[3].toString();
             String samount = data[4].toString();
-            //add trans func
-            System.out.println(snarrative);
+            addTransaction(transactions,sdate,sto,sfrom,snarrative,samount);
+            //System.out.println(snarrative);
         }
         return transactions;
     }
