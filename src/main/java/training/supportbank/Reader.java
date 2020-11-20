@@ -16,22 +16,22 @@ public abstract class Reader {
 
     public abstract List<Transaction> readFile(Bank bank, String filename) throws IOException;
 
-    public void addTransaction(Bank bank, String sdate, String sto, String sfrom, String snarrative, String smoney) {
+    public void addTransaction(Bank bank, String dateString, String toString, String fromString, String narrative, String moneyString) {
         List<Transaction> transactions = bank.getTransactions();
         List<Person> people = bank.getPeople();
         try {
-            Date date = convertDate(sdate);
-            Person to = checkPerson(sto,people);
-            Person from = checkPerson(sfrom,people);
-            String narrative = snarrative;
-            Money amount = new Money(smoney);
+            Date date = convertDate(dateString);
+            Person to = checkPerson(toString,people);
+            Person from = checkPerson(fromString,people);
+            narrative = narrative;
+            Money amount = new Money(moneyString);
 
             Transaction transaction = new Transaction(date, amount, from, to, narrative);
             transactions.add(transaction);
         } catch (ParseException e) {
-            LOGGER.info("Invalid date: " + sdate);
+            LOGGER.info("Invalid date: " + dateString);
         } catch (NumberFormatException e) {
-            LOGGER.info("Non-parsable string given for amount: '" + smoney + "'" + "or Invalid date" + sdate);
+            LOGGER.info("Non-parsable string given for amount: '" + moneyString + "'" + "or Invalid date" + dateString);
         }
 
     }
