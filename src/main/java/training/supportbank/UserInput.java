@@ -27,7 +27,7 @@ public class UserInput {
             String command = scanner.nextLine();
             String[] commands = command.split(" ");
 
-                if (commands[0].equals("List")) {
+                if (commands[0].equalsIgnoreCase("List")) {
                     if(bank.getTransactions().size() == 0){
                         System.out.println("No transactions imported");
                     } else {
@@ -48,15 +48,15 @@ public class UserInput {
                             System.out.println("Can call 'list all' or 'list [Person]'");
                         }
                     }
-                }else if (commands[0].equals("Import")){
+                }else if (commands[0].equalsIgnoreCase("Import")){
                     System.out.println("Importing file");
                     bank.updateTransactionFromFile(commands[2]);
-                }else if (commands[0].equals("Export")){
+                }else if (commands[0].equalsIgnoreCase("Export")){
                     System.out.println("Export file");
                     bank.writeTransaction(commands[2]);
-                }else if(command.equals("help")){
+                }else if(command.equalsIgnoreCase("help")){
                     System.out.println(helpMessage);
-                } else if(command.equals("exit")){
+                } else if(command.equalsIgnoreCase("exit")){
                     keepRunning = false;
                 } else {
                     System.out.println("Invalid Command");

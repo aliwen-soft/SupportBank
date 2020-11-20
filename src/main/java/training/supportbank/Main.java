@@ -13,7 +13,7 @@ public class Main {
         try {
             UserInput.run(bank);
         } catch (InvalidParameterException e){
-            LOGGER.info("Invalid File Type: Must be .CSV, .XML or .JSON");
+            LOGGER.info("Invalid File Type: Must be .csv, .xml or .json");
         }
 
     }

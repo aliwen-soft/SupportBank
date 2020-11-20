@@ -76,12 +76,12 @@ public class Bank {
         Reader reader;
         String[] fileData = file.split("\\.");
 
-        if (fileData[1].equals("csv")) reader = new CSVReader();
-        else if (fileData[1].equals("xml"))
+        if (fileData[1].equalsIgnoreCase("csv")) reader = new CSVReader();
+        else if (fileData[1].equalsIgnoreCase("xml"))
             reader = new XMLReader();
-        else if (fileData[1].equals("json"))
+        else if (fileData[1].equalsIgnoreCase("json"))
             reader = new JSONReader();
-        else throw new InvalidParameterException("File type must be .XML, .CSV or .JSON");
+        else throw new InvalidParameterException("File type must be .xml, .csv or .json");
 
 
         try {
