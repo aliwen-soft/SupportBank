@@ -39,7 +39,7 @@ public class Transaction {
     }
 
     //checks if the transaction involves the given person
-    public boolean involvesPeron(Person person){
+    public boolean InvolvesPeron(Person person){
         boolean output = false;
         if (transactionFrom.equals(person)) output = true;
         if (transactionTo.equals(person)) output = true;

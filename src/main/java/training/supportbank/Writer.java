@@ -8,6 +8,6 @@ import java.util.List;
 public abstract class Writer {
     public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    public abstract void write(List<Transaction> transactions, String file) throws IOException;
+    public abstract void Write(List<Transaction> transactions, String file) throws IOException;
 
 }

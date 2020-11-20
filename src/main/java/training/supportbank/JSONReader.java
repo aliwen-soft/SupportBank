@@ -13,18 +13,13 @@ import java.util.stream.Stream;
 public class JSONReader extends Reader {
     private static final Logger LOGGER = LogManager.getLogger();
 
-
-    public JSONReader(List<Person> people){
-        this.people=people;
-    }
-
     @Override
     public Date convertDate(String date) throws ParseException {
         Date dateOut = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         return  dateOut;
     }
 
-    public List<Transaction> readFile(String filename) throws IOException,NumberFormatException {
+    public List<Transaction> readFile(Bank bank,String filename) throws IOException,NumberFormatException {
         List<Transaction> transactions = new ArrayList<Transaction>();
 
 
@@ -42,7 +37,7 @@ public class JSONReader extends Reader {
             String sto = data[2].toString();
             String snarrative = data[3].toString();
             String samount = data[4].toString();
-            addTransaction(transactions,sdate,sto,sfrom,snarrative,samount);
+            addTransaction(bank,sdate,sto,sfrom,snarrative,samount);
             //System.out.println(snarrative);
         }
         return transactions;

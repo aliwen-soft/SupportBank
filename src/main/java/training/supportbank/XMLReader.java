@@ -2,6 +2,7 @@ package training.supportbank;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,9 +14,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,15 +22,10 @@ public class XMLReader extends Reader {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public XMLReader(List<Person> people) {
-        this.people = people;
-    }
 
     public Date convertExcelTime(String excelDate) throws NumberFormatException  {
         double time = Double.parseDouble(excelDate);
-        LocalDate localdate =LocalDate.of( 1899 , Month.DECEMBER , 30 ).plusDays((long)time);
-        Date date = Date.from(localdate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+        Date date = DateUtil.getJavaDate(time);
         return date;
     }
 
@@ -42,7 +35,7 @@ public class XMLReader extends Reader {
         return  dateOut;
     }
 
-    public List<Transaction> readFile(String filename) throws IOException {
+    public List<Transaction> readFile(Bank bank,String filename) throws IOException {
         List<Transaction> transactions = new ArrayList<Transaction>();
         try {
             File xmlFile = new File(filename);
@@ -65,7 +58,7 @@ public class XMLReader extends Reader {
                         String to= parties.getElementsByTagName("To").item(0).getTextContent();
                         String from= parties.getElementsByTagName("From").item(0).getTextContent();
 
-                        addTransaction(transactions,date,to,from,description,value);
+                        addTransaction(bank,date,to,from,description,value);
                     }
                 }
             }
@@ -74,9 +67,7 @@ public class XMLReader extends Reader {
             LOGGER.info("failed to parse file: " + filename);
             e.printStackTrace();
         }
-        for(Transaction t:transactions){
-          //  System.out.println(t.getTransactionNarrative());
-        }
+
         return transactions;
     }
 
